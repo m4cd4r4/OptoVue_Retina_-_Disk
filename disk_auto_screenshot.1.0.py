@@ -1,5 +1,21 @@
 import pyautogui
+import datetime
 import time
+
+import re
+
+import tkinter as tk
+from tkinter import simpledialog
+
+ROOT = tk.Tk()
+ROOT.withdraw()
+patient = simpledialog.askstring(title="Retina Screenshots",
+                                  prompt="Patient Name/ID:")
+
+datetimeObject = datetime.datetime.today()
+t = str(datetimeObject.time())
+pattern = r':'
+mod_t = re.sub(pattern, '', t)
 
 pyautogui.click(x=1850, y=108) # close quickvue
 time.sleep(2)
