@@ -1,41 +1,48 @@
 """
-1   User - choose patient & load a "retina" volume
+FAST ACQUISITION OF SCREENSHOTS IN SPECIFIC ORIENTATIONS,
+SAVED OUT TO THE FOLDER WHERE THE SCRIPT IS LOCATED,
+LABELLED AS "[PATIENT]_[VOLUME]_[SCREENSHOT# & ORIENTATION].TIFF"
 
-    (Automated:)
-
-2   Ask user to input patient name/patient ID & volume #
-3   close QuickVue
-4   uncheck "Show Lines"
-5   select "Retina"
-6   take screenshot 1
-7   select "Measure\Density"
-8   check "Show Lines"
-9   take screenshot 2
-10   uncheck "Show Lines"
-11  take screenshot 3
-12  select "Deep"
-13  check "Show Lines"
-14  take screenshot
-15  uncheck "Show Lines"
-16  take screenshot
-"""
+1- Load a volume, 2- Run the retina or disk script, 3- Enter patient name & volume number
+  [AUTOMATED STEPS]
+3- close QuickVue     4- uncheck "Show Lines"     5- select "Retina"     6- take screenshot 1
+7- select "Measure\Density"    8- check "Show Lines"    9- take screenshot 2
+10- uncheck "Show Lines"   11- take screenshot 3
+12- select "Deep"   13- check "Show Lines"    14-take screenshot 4
+15- uncheck "Show Lines"    16- take screenshot 5
+17- check "Show Lines"    18- take screenshot 6 """
 
 import pyautogui
-import datetime
 import time
-import re
 import tkinter as tk
 from tkinter import simpledialog
 import tkinter.messagebox
-
+import PySimpleGUI as sg   
+  
 ROOT = tk.Tk()
 ROOT.withdraw()
 
-patient = simpledialog.askstring(title="Retina Screenshots",
-prompt="Patient Name/ID:") # ask user for string to append to screenshot label
 
-volume = simpledialog.askstring(title="Retina Screenshots",
-prompt="Volume #:") # ask user for volume number (1, 2, 3 etc)
+"""
+PySimpleGUI - Form to request patient name/ID & volume # 
+"""
+
+layout = [[sg.Text('Please enter the Patient Name & Volume number')],
+          [sg.Text('Name', size=(10, 1)), sg.InputText(key='-NAME-')],
+          [sg.Text('Vol #', size=(10, 1)), sg.InputText(key='-VOL-')],
+          [sg.Button('Submit'), sg.Button('Cancel')]]
+
+window = sg.Window('Auto-Screenshot - Retina', layout)
+event, values = window.read(close=True)
+
+if event == 'Submit':
+    patient = values['-NAME-']
+    volume = values['-VOL-']
+else:
+  print('User cancelled')
+  exit()
+
+# Begin acquiring screenshots
 
 pyautogui.click(x=1850, y=108) # close quickvue
 time.sleep(2)
