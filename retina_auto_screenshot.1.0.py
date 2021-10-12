@@ -31,6 +31,9 @@ ROOT.withdraw()
 patient = simpledialog.askstring(title="Retina Screenshots",
 prompt="Patient Name/ID:") # ask user for string to append to screenshot label
 
+volume = simpledialog.askstring(title="Retina Screenshots",
+prompt="Volume #:") # ask user for volume number (1, 2, 3 etc)
+
 datetimeObject = datetime.datetime.today()
 t = str(datetimeObject.time())
 pattern = r':'
