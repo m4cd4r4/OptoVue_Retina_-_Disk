@@ -1,20 +1,22 @@
 """
-Author: Macdara O Murchu - Physiology & Pharmacology Dept, LEI
+Author: Macdara O Murchu - Physiology & Pharmacology Dept
 v1.2 - replaced regex & timestamp with "pysimplegui" uniquely identifying patient info
+
+Install:
+pyautogui
+pysimplegui
+pillow
 
 FAST ACQUISITION OF SCREENSHOTS IN SPECIFIC ORIENTATIONS,
 SAVED OUT TO THE FOLDER WHERE THE SCRIPT IS LOCATED,
 LABELLED AS "[PATIENT]_[VOLUME]_[SCREENSHOT# & ORIENTATION].TIFF"
 
-1- Load a volume, 2- Run the retina or disk script, 3- Enter patient name & volume number
+1- Load a volume, 2- Run the DISC script, 3- Enter patient name & volume number
   [AUTOMATED STEPS]
-3- close QuickVue     4- uncheck "Show Lines"     5- select "Retina"     6- take screenshot 1
-7- select "Measure\Density"    8- check "Show Lines"    9- take screenshot 2
-10- uncheck "Show Lines"   11- take screenshot 3
-12- select "Deep"   13- check "Show Lines"    14-take screenshot 4
-15- uncheck "Show Lines"    16- take screenshot 5
-17- check "Show Lines"    18- take screenshot 6 
+3- close QuickVue     4- select "measure"     5- select "density"   9- check "show lines"   10- take screenshot 7
+11- uncheck "Show Lines"   12- take screenshot 8
 """
+
 import pyautogui as pag
 import time
 import tkinter as tk
@@ -24,11 +26,6 @@ import PySimpleGUI as sg
   
 ROOT = tk.Tk()
 ROOT.withdraw()
-
-
-"""
-PySimpleGUI - Form to request patient name/ID & volume # 
-"""
 
 layout = [[sg.Text('Please enter the Patient Name & Volume number')],
           [sg.Text('Name', size=(10, 1)), sg.InputText(key='-NAME-')],
@@ -62,7 +59,7 @@ time.sleep(.2)
 pag.click(x=1835, y=453) # uncheck "show lines"
 time.sleep(.2)
 im = pag.screenshot() # take screenshot
-im.save(patient + '_vol_' + volume + '_screenshot_8_disc_dens_lines' + '.tiff') 
+im.save(patient + '_vol_' + volume + '_screenshot_8_disc_dens_no_lines' + '.tiff') 
 
 tkinter.messagebox.showinfo('Disc','Finished')
 ROOT.mainloop()
